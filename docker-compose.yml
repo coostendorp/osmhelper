@@ -13,8 +13,7 @@ services:
     build: "."
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ${PROJECT_DIR}/data:/opt/data
-      - ${PROJECT_DIR}/${ACTIVE_MAPPING}:/opt/mapping.yaml
+      - ${PROJECT_DIR}:/opt/project
     networks:
       - postgres
     ports:
