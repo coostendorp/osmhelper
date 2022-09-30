@@ -36,9 +36,8 @@ const commands = {
     init: function () {},
     start: function () {
         if (
-            shell.exec(
-                `docker-compose  --env-file ${envPath} up --build -d  postgis`
-            ).code !== 0
+            shell.exec(`docker-compose  --env-file ${envPath} up --build -d`)
+                .code !== 0
         ) {
             shell.echo("Error: startup")
             shell.exit(1)
@@ -74,14 +73,17 @@ const commands = {
             `Importing ${outputPath} to Postgis using mapping ${process.env["ACTIVE_MAPPING"]}`
         )
         if (
-            shell.exec(`docker-compose --env-file ${envPath} exec -T postgis \
-		./imposm import \
-		-overwritecache \
-		-mapping /opt/project/${process.env["ACTIVE_MAPPING"]} \
-		-read /opt/project/${outputPath} \
-		-write \
-		-connection postgis://postgres:postgres@localhost/postgres?prefix=NONE`)
-                .code !== 0
+            shell.exec(
+                `docker-compose --env-file ${envPath} exec -T postgis \
+                ./imposm import \
+                -overwritecache \
+                -dbschema-import public \
+                -mapping /opt/project/${process.env["ACTIVE_MAPPING"]} \
+                -read /opt/project/${outputPath} \
+                -write \
+                -connection postgis://postgres:postgres@localhost/postgres?prefix=NONE
+		`
+            ).code !== 0
         ) {
             shell.echo("Error: imposm")
             shell.exit(1)
