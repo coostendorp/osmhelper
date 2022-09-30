@@ -21,3 +21,17 @@ services:
     env_file: ./.env
     environment:
       PGPORT: ${POSTGRES_PORT:-5432}
+  pgweb:
+    container_name: pgweb
+    restart: always
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    links:
+      - postgis:postgres  # my database container is called postgres, not db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@postgres:${POSTGRES_PORT:-5432}/postgres?sslmode=disable
+    depends_on:
+      - postgis
+    networks:
+      - postgres
