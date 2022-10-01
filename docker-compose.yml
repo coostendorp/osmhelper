@@ -26,7 +26,7 @@ services:
     restart: always
     image: sosedoff/pgweb
     ports:
-      - "127.0.0.1:8081:8081"
+      - "127.0.0.1:${PGWEB_PORT:-5432}:8081"
     links:
       - postgis:postgres  # my database container is called postgres, not db
     environment:
