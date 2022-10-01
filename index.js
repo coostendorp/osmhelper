@@ -78,6 +78,7 @@ const commands = {
                 ./imposm import \
                 -overwritecache \
                 -dbschema-import public \
+                -srid ${process.env["IMPOSM_SRID"]} \
                 -mapping /opt/project/${process.env["ACTIVE_MAPPING"]} \
                 -read /opt/project/${outputPath} \
                 -write \
