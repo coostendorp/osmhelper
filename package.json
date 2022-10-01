@@ -1,6 +1,6 @@
 {
   "name": "osmhelper",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "OpenStreetmaps data helper",
   "author": "Caspar Oostendorp <osm@sparca.nl>",
   "license": "MIT",
